@@ -3,10 +3,10 @@
 #include "Plugin/Models/ServerInformation.h"
 #include "WaitForTest.h"
 
-const FString TestSecretKey = TEXT("7e37150ac6f76152522a83f33b72b419d2c81415");
-const FString TestOnlinePlayerName = TEXT("xndir");
+const FString TestSecretKey = TEXT("your-secret-key");
+const FString TestOnlinePlayerName = TEXT("TebexDevUser");
 const int TestPluginPackageId = 6051250;
-const FString TestPluginPlayerId = "9e65a968ee4743d19a2a4c9969154491";
+const FString TestPluginPlayerId = "some-player-uuid";
 const TArray<int> TestDeleteCommandIds = { 123456, 654321 };
 
 class FTebexPluginApiTest : public FAutomationTestBase

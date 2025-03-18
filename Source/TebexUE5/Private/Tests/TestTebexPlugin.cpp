@@ -15,7 +15,6 @@ public:
     FTebexPluginTest(const FString& InName, const bool bInComplexTask)
         : FAutomationTestBase(InName, bInComplexTask)
     {
-        //UTebexHeadlessAPI::SetPublicToken(TestPluginPublicToken);
         UTebexPluginAPI::SetSecretKey(TestPluginSecretKey);
         Plugin = NewObject<UTebexPlugin>();
     }
