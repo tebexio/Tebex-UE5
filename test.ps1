@@ -1,0 +1,1 @@
+﻿C:\UE_5.3\Engine\Binaries\Win64\UnrealEditor-Cmd.exe "C:\Users\TebexDev\Documents\Unreal Projects\Tebex\Tebex.uproject" -ExecCmds="Automation RunTests Tebex" -unattended -stdout -nullrhi -nopause -testexit="Test Complete"
