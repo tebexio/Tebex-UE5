@@ -1,3 +1,4 @@
+![Tebex Logo](https://www.tebex.io/_nuxt/logo.BCN2mLkL.svg)
 # Tebex for Unreal Engine 5
 
 This is the official [Tebex](https://tebex.io/) SDK for Unreal Engine 5. Tebex is a gaming-focused payments processor that 
