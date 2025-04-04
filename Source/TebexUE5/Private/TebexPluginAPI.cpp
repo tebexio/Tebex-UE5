@@ -9,6 +9,7 @@
 #include "Headless/EmptyBody.h"
 #include "Plugin/RequestTypes.h"
 #include "Plugin/Models/JoinEvent.h"
+#include "Tests/Debug.h"
 
 const FString UTebexPluginAPI::BaseUrl = "https://plugin.tebex.io/";
 FString UTebexPluginAPI::SecretKey = TEXT("");

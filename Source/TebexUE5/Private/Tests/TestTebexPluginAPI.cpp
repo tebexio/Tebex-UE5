@@ -19,7 +19,7 @@ public:
     }
 };
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPIGetServerInfoTest, FTebexPluginApiTest, "Tebex.PluginAPI.GetServerInfo", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPIGetServerInfoTest, FTebexPluginApiTest, "Tebex.PluginAPI.GetServerInfo", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexPluginAPIGetServerInfoTest::RunTest(const FString& Parameters)
 {
     ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FServerInformation>(this,
@@ -50,7 +50,7 @@ bool FTebexPluginAPIGetServerInfoTest::RunTest(const FString& Parameters)
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPIGetDuePlayersTest, FTebexPluginApiTest, "Tebex.PluginAPI.GetDuePlayers", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPIGetDuePlayersTest, FTebexPluginApiTest, "Tebex.PluginAPI.GetDuePlayers", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexPluginAPIGetDuePlayersTest::RunTest(const FString& Parameters)
 {
     ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FDuePlayersResponse>(this,
@@ -74,7 +74,7 @@ bool FTebexPluginAPIGetDuePlayersTest::RunTest(const FString& Parameters)
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPIGetOfflineCommandsTest, FTebexPluginApiTest, "Tebex.PluginAPI.GetOfflineCommands", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPIGetOfflineCommandsTest, FTebexPluginApiTest, "Tebex.PluginAPI.GetOfflineCommands", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexPluginAPIGetOfflineCommandsTest::RunTest(const FString& Parameters)
 {
     ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FOfflineCommandsResponse>(this,
@@ -96,7 +96,7 @@ bool FTebexPluginAPIGetOfflineCommandsTest::RunTest(const FString& Parameters)
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPIGetOnlineComandsTest, FTebexPluginApiTest, "Tebex.PluginAPI.GetOnlineCommands", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPIGetOnlineComandsTest, FTebexPluginApiTest, "Tebex.PluginAPI.GetOnlineCommands", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexPluginAPIGetOnlineComandsTest::RunTest(const FString& Parameters)
 {
     ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FOnlineCommandsResponse>(this,
@@ -117,7 +117,7 @@ bool FTebexPluginAPIGetOnlineComandsTest::RunTest(const FString& Parameters)
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPIDeleteCommandsTest, FTebexPluginApiTest, "Tebex.PluginAPI.DeleteCommands", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPIDeleteCommandsTest, FTebexPluginApiTest, "Tebex.PluginAPI.DeleteCommands", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexPluginAPIDeleteCommandsTest::RunTest(const FString& Parameters)
 {
     ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FEmptyBody>(this,
@@ -138,7 +138,7 @@ bool FTebexPluginAPIDeleteCommandsTest::RunTest(const FString& Parameters)
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPICreateCheckoutUrlTest, FTebexPluginApiTest, "Tebex.PluginAPI.CreateCheckoutUrl", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPICreateCheckoutUrlTest, FTebexPluginApiTest, "Tebex.PluginAPI.CreateCheckoutUrl", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexPluginAPICreateCheckoutUrlTest::RunTest(const FString& Parameters)
 {
     ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FCheckoutResponse>(this,
@@ -160,7 +160,7 @@ bool FTebexPluginAPICreateCheckoutUrlTest::RunTest(const FString& Parameters)
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPIListActivePackagesTest, FTebexPluginApiTest, "Tebex.PluginAPI.ListActivePackages", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPIListActivePackagesTest, FTebexPluginApiTest, "Tebex.PluginAPI.ListActivePackages", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexPluginAPIListActivePackagesTest::RunTest(const FString& Parameters)
 {
     ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FActivePackagesResponse>(this,
@@ -192,7 +192,7 @@ bool FTebexPluginAPIListActivePackagesTest::RunTest(const FString& Parameters)
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPISendEventsTest, FTebexPluginApiTest, "Tebex.PluginAPI.SendEvents", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginAPISendEventsTest, FTebexPluginApiTest, "Tebex.PluginAPI.SendEvents", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexPluginAPISendEventsTest::RunTest(const FString& Parameters)
 {
     ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FEmptyBody>(this,

@@ -20,14 +20,14 @@ public:
     }
 };
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginEnableTest, FTebexPluginTest, "Tebex.Plugin.Enable", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginEnableTest, FTebexPluginTest, "Tebex.Plugin.Enable", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ServerContext)
 bool FTebexPluginEnableTest::RunTest(const FString& Parameters)
 {
     TestTrue("Plugin is enabled successfully", Plugin->Enable());
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexRecordCompletedCommandTest, FTebexPluginTest, "Tebex.Plugin.RecordCompletedCommand", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexRecordCompletedCommandTest, FTebexPluginTest, "Tebex.Plugin.RecordCompletedCommand", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexRecordCompletedCommandTest::RunTest(const FString& Parameters)
 {
     TestTrue("Plugin completed commands is empty", Plugin->GetCompletedCommands().Num() == 0);
@@ -52,7 +52,7 @@ bool FTebexRecordCompletedCommandTest::RunTest(const FString& Parameters)
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginRecordJoinEventTest, FTebexPluginTest, "Tebex.Plugin.RecordJoinEvent", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginRecordJoinEventTest, FTebexPluginTest, "Tebex.Plugin.RecordJoinEvent", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexPluginRecordJoinEventTest::RunTest(const FString& Parameters)
 {
     TestTrue("Plugin join events is empty", Plugin->GetJoinEvents().events.Num() == 0);
@@ -61,7 +61,7 @@ bool FTebexPluginRecordJoinEventTest::RunTest(const FString& Parameters)
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginRefreshServerInformationTest, FTebexPluginTest, "Tebex.Plugin.RefreshServerInformation", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginRefreshServerInformationTest, FTebexPluginTest, "Tebex.Plugin.RefreshServerInformation", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexPluginRefreshServerInformationTest::RunTest(const FString& Parameters)
 {
     TestTrue("Plugin started with no server information", Plugin->GetServerInformation().server.name.Len() == 0);
@@ -81,7 +81,7 @@ bool FTebexPluginRefreshServerInformationTest::RunTest(const FString& Parameters
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginPerformCheckTest, FTebexPluginTest, "Tebex.Plugin.PerformCheck", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginPerformCheckTest, FTebexPluginTest, "Tebex.Plugin.PerformCheck", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexPluginPerformCheckTest::RunTest(const FString& Parameters)
 {
     ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FEmptyBody>(this,

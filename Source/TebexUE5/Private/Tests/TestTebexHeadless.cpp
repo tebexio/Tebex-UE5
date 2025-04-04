@@ -28,7 +28,7 @@ public:
     }
 };
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexGetWebstoreTest, FTebexHeadlessTest, "Tebex.HeadlessAPI.GetWebstore", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexGetWebstoreTest, FTebexHeadlessTest, "Tebex.HeadlessAPI.GetWebstore", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexGetWebstoreTest::RunTest(const FString& Parameters)
 {
     ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FWebstore>(
@@ -60,7 +60,7 @@ bool FTebexGetWebstoreTest::RunTest(const FString& Parameters)
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexGetAllPackagesTest, FTebexHeadlessTest, "Tebex.HeadlessAPI.GetAllPackages", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexGetAllPackagesTest, FTebexHeadlessTest, "Tebex.HeadlessAPI.GetAllPackages", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexGetAllPackagesTest::RunTest(const FString& Parameters)
 {
     ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FPackagesResponse>(
@@ -101,7 +101,7 @@ bool FTebexGetAllPackagesTest::RunTest(const FString& Parameters)
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexGetPackageByIdTest, FTebexHeadlessTest, "Tebex.HeadlessAPI.GetPackageById", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexGetPackageByIdTest, FTebexHeadlessTest, "Tebex.HeadlessAPI.GetPackageById", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexGetPackageByIdTest::RunTest(const FString& Parameters)
 {
     ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FWrappedPackage>(
@@ -139,7 +139,7 @@ bool FTebexGetPackageByIdTest::RunTest(const FString& Parameters)
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexGetAllCategoriesTest, FTebexHeadlessTest, "Tebex.HeadlessAPI.GetAllCategories", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexGetAllCategoriesTest, FTebexHeadlessTest, "Tebex.HeadlessAPI.GetAllCategories", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexGetAllCategoriesTest::RunTest(const FString& Parameters)
 {
     ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FCategoriesResponse>(
@@ -172,7 +172,7 @@ bool FTebexGetAllCategoriesTest::RunTest(const FString& Parameters)
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexGetAllCategoriesIncludingPackagesTest, FTebexHeadlessTest, "Tebex.HeadlessAPI.GetAllCategoriesIncludingPackages", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexGetAllCategoriesIncludingPackagesTest, FTebexHeadlessTest, "Tebex.HeadlessAPI.GetAllCategoriesIncludingPackages", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexGetAllCategoriesIncludingPackagesTest::RunTest(const FString& Parameters)
 {
     ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FCategoriesResponse>(
@@ -203,7 +203,7 @@ bool FTebexGetAllCategoriesIncludingPackagesTest::RunTest(const FString& Paramet
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexGetCategoryTest, FTebexHeadlessTest, "Tebex.HeadlessAPI.GetCategory", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexGetCategoryTest, FTebexHeadlessTest, "Tebex.HeadlessAPI.GetCategory", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexGetCategoryTest::RunTest(const FString& Parameters)
 {
     ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FCategory>(
@@ -229,7 +229,7 @@ bool FTebexGetCategoryTest::RunTest(const FString& Parameters)
     return true;
 }
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexCreateAndUseBasketTest, FTebexHeadlessTest, "Tebex.HeadlessAPI.CreateAndUseBasket", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexCreateAndUseBasketTest, FTebexHeadlessTest, "Tebex.HeadlessAPI.CreateAndUseBasket", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 
 bool FTebexCreateAndUseBasketTest::RunTest(const FString& Parameters)
 {

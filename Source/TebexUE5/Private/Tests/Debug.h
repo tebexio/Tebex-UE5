@@ -1,5 +1,8 @@
 ﻿#pragma once
 
+#include "CoreMinimal.h"
+#include "TebexHeadlessAPI.h"
+
 template <typename T>
 void PrintUStructProperties(const T& Ref)
 {
