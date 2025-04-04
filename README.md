@@ -11,13 +11,15 @@ allows you to easily set up your game for monetization.
 
 Depending on your IDE, all source files may not immediately be recognized and added to your game's solution and cause compilation failures. Ensure all files in the `Plugins/TebexUE5` folder are indexed in your IDE.
 
+- Rider: In **File System** view, right-click any source code files in `Plugins/TebexUE5` suffixed with `no index` and click **Include**.
+
 ## Features
 
 - **Headless API Integration**: A C++ implementation for [Headless API](https://docs.tebex.io/developers/headless-api/overview) used for retrieving packages and creating baskets
 - **Plugin API Support**: If your game delivers purchases through commands, our [Plugin API](https://docs.tebex.io/plugin) enables automated command execution after payment.
 - **Example Plugin**: We've included an example TebexPlugin for Unreal Engine to demonstrate how a Tebex integration should operate.
 
-Our SDK is built on **Unreal Engine 5.5.4**, however most SDK code should be modular between Unreal Engine versions.
+Our SDK is built on **Unreal Engine 5.5.4**, however most SDK code should be modular between Unreal Engine versions with minimal required changes.
 
 ## What is Tebex?
 [Tebex](https://tebex.io) allows game studios and/or players to set up a digital storefront and sell **Packages**. **Packages** can include deliverables such as **Game Commands**, **License Keys**, **Downloads**, and more.
