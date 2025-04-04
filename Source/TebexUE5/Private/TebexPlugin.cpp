@@ -126,9 +126,10 @@ void UTebexPlugin::RefreshServerInformation(TOkCallable<FServerInformation> Call
 		{
 			Callback(ServerInformation);	
 		}
-	}, [](FHttpErr ServerInformationFailResponse)
+	}, [Callback](FHttpErr ServerInformationFailResponse)
 	{
 		FTebexUE5::Log("Failed to get server information: " + ServerInformationFailResponse->GetContentAsString());
+		Callback(FServerInformation());
 	});
 }
 
@@ -192,9 +193,10 @@ void UTebexPlugin::DeleteCompletedCommands(TOkCallable<FEmptyBody> Callback)
 		{
 			Callback(Response);	
 		}
-	}, [](FHttpErr Response)
+	}, [Callback](FHttpErr Response)
 	{
 		FTebexUE5::Log("Failed to send delete commands: " + Response->GetContentAsString());
+		Callback(FTebexUE5::EmptyRequest);
 	});
 }
 

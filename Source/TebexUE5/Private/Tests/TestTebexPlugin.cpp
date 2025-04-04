@@ -20,7 +20,7 @@ public:
     }
 };
 
-IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginEnableTest, FTebexPluginTest, "Tebex.Plugin.Enable", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ServerContext)
+IMPLEMENT_CUSTOM_SIMPLE_AUTOMATION_TEST(FTebexPluginEnableTest, FTebexPluginTest, "Tebex.Plugin.Enable", EAutomationTestFlags::ProductFilter | EAutomationTestFlags_ApplicationContextMask)
 bool FTebexPluginEnableTest::RunTest(const FString& Parameters)
 {
     TestTrue("Plugin is enabled successfully", Plugin->Enable());

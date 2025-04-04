@@ -8,18 +8,18 @@
 #define LOCTEXT_NAMESPACE "FTebexUE5Module"
 
 const FEmptyBody FTebexUE5::EmptyRequest;
-
+const FString ExamplePublicToken = TEXT("<PUBLICTOKEN>");
 void FTebexUE5::StartupModule()
 {
 	Log("Tebex is loading...");
-	UTebexHeadlessAPI::SetPublicToken("t66x-7cd928b1e9399909e6810edac6dc1fd1eefc57cb");
+	UTebexHeadlessAPI::SetPublicToken(ExamplePublicToken);
 	UTebexHeadlessAPI::GetWebstore([](const FWebstore& Store)
 	{
 		Log("Store loaded: " + Store.Name);
 		UTebexHeadlessAPI::GetAllPackages([](const FPackagesResponse& Packages)
 		{
 			Log(FString::FromInt(Packages.data.Num()) + " packages loaded");
-			// Use Packages
+			// Use Packages here
 		},
 		[](FHttpErr GetPackagesError)
 		{
