@@ -19,13 +19,13 @@ class UTebexPlugin : public UObject
 	
 	static void RecordJoinEvent(FString PlayerId, FString PlayerUsername);
 	static bool DispatchCommand(const FString Command);
-	static void DelayCommand(const FCommand Command, int32 Seconds);
+	static void DelayCommand(const FCommand Command);
 	static void RecordCompletedCommand(const FCommand Command);
 	
-	static void RefreshServerInformation(TOkCallable<FServerInformation> Callback);
-	static void PerformCheck(TOkCallable<FEmptyBody> Callback);
-	static void DeleteCompletedCommands(TOkCallable<FEmptyBody> Callback);
-	static void SendJoinEvents(TOkCallable<FEmptyBody> Callback);
+	static void RefreshServerInformation(TOkCallable<FServerInformation> Callback, FErrCallable Error);
+	static void PerformCheck(TOkCallable<FEmptyBody> Callback, FErrCallable Error);
+	static void DeleteCompletedCommands(TOkCallable<FEmptyBody> Callback, FErrCallable Error);
+	static void SendJoinEvents(TOkCallable<FEmptyBody> Callback, FErrCallable Error);
 	
 	static void BeginRepeatingTask(int IntervalSeconds, TFunction<void()> Task);
 	static void BeginDelayedTask(int DelaySeconds, TFunction<void()> Task);

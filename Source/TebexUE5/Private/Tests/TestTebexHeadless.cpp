@@ -158,15 +158,14 @@ bool FTebexGetAllCategoriesTest::RunTest(const FString& Parameters)
         {
             Test->TestTrue("GetAllCategories callback triggered", true);
             
-
-            //FIXME
-            //Test->TestTrue("Categories array should not be empty", Data.data > 0);
-            // for (FCategory C : Data)
-            // {
-            //     Test->TestTrue("Category ID should be greater than 0", C.Id > -1);
-            //     Test->TestTrue("Category name should not be empty", C.Name.Len() > 0);
-            //     Test->TestTrue("Category order should be valid", C.Order > -1);
-            // }
+            Test->TestTrue("Categories array should not be empty", Data.data.Num() > 0);
+            for (FCategory C : Data)
+            {
+                Test->TestTrue("Category ID should be greater than 0", C.id > -1);
+                Test->TestTrue("Category name should not be empty", C.name.Len() > 0);
+                Test->TestTrue("Category description should not be empty", C.description.Len() > 0);
+                Test->TestTrue("Category order should be valid", C.order > -1);
+            }
         }));
 
     return true;
@@ -190,14 +189,25 @@ bool FTebexGetAllCategoriesIncludingPackagesTest::RunTest(const FString& Paramet
         [](FAutomationTestBase* Test, FCategoriesResponse Data)
         {
             Test->TestTrue("GetAllCategoriesIncludingPackages callback triggered", true);
-            //FIXME
-            // Test->TestTrue("Categories array should not be empty", Data.() > 0);
-            // for (FCategory C : Data)
-            // {
-            //     Test->TestTrue("Category ID should be greater than 0", C.Id > -1);
-            //     Test->TestTrue("Category name should not be empty", C.Name.Len() > 0);
-            //     Test->TestTrue("Category order should be valid", C.Order > -1);
-            // }
+            Test->TestTrue("Categories array should not be empty", Data.data.Num() > 0);
+            for (FCategory C : Data)
+            {
+                Test->TestTrue("Category ID should be greater than 0", C.id > -1);
+                Test->TestTrue("Category name should not be empty", C.name.Len() > 0);
+                Test->TestTrue("Category description should not be empty", C.description.Len() > 0);
+                Test->TestTrue("Category order should be valid", C.order > -1);
+                Test->TestTrue("Category should contain some packages", C.packages.Num() > 0);
+                for (FTebexPackage P : C.packages)
+                {
+                    Test->TestTrue("Package ID should be greater than 0", P.Id > 0);
+                    Test->TestTrue("Package name should not be empty", P.Name.Len() > 0);
+                    Test->TestTrue("Package description should not be empty", P.Description.Len() > 0);
+                    Test->TestTrue("Package type should not be empty", P.Type.Len() > 0);
+                    Test->TestTrue("Package category should be assigned", P.Category.Id > 0);
+                    Test->TestTrue("Package category has a description", !P.Category.Name.IsEmpty());
+                    Test->TestTrue("Package base price should be assigned", P.Base_Price >= 0.0f);
+                }
+            }
         }));
 
     return true;
@@ -429,26 +439,6 @@ bool FTebexCreateAndUseBasketTest::RunTest(const FString& Parameters)
                                                                              GetBasketTest->TestNotEqual("Total_Price should not be default -1.0f", Basket.total_price, -1.0f);
                                                                              GetBasketTest->TestTrue("Currency should be present", Basket.currency.Len() > 0);
                                                                              GetBasketTest->TestTrue("Custom map should be initialized empty", Basket.custom.Num() == 0);
-                                                                             
-                                                                             // Get auth links
-                                                                             // ADD_LATENT_AUTOMATION_COMMAND(FWaitForTest<FBasketLinks>(
-                                                                             //     this,
-                                                                             //     [Basket](TFunction<void(FBasketLinks&)> Callback, TFunction<void(FHttpResponsePtr&)> ErrorCallback)
-                                                                             //     {
-                                                                             //         UTebexHeadlessAPI::GetBasketAuthLinks(Basket, TestReturnUrl, [Callback](FBasketLinks BasketLinks)
-                                                                             //         {
-                                                                             //             Callback(BasketLinks);
-                                                                             //         }, [ErrorCallback](FHttpResponsePtr ErrorResponse)
-                                                                             //         {
-                                                                             //             ErrorCallback(ErrorResponse);
-                                                                             //         });
-                                                                             //     },
-                                                                             //     [](FAutomationTestBase* BasketAuthLinksTest, const FBasketLinks& BasketLinks)
-                                                                             //     {
-                                                                             //         BasketAuthLinksTest->TestFalse("Checkout URL is present", BasketLinks.checkout.IsEmpty());
-                                                                             //         BasketAuthLinksTest->TestFalse("Payment URL is present", BasketLinks.payment.IsEmpty());
-                                                                             //     }
-                                                                             // ));
                                                                          }
                                                                      ));
                                                                 }

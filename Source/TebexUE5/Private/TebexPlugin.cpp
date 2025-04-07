@@ -17,24 +17,55 @@ bool UTebexPlugin::Enable()
 {
 	BeginRepeatingTask(60 * 30, []
 	{
-		RefreshServerInformation(nullptr);
+		if (!UTebexPluginAPI::IsSecretKeySet())
+		{
+			FTebexUE5::Log("Plugin secret key is not set.");
+			return;
+		}
+		
+		RefreshServerInformation([](FServerInformation Info)
+		{
+			UTebexPlugin::ServerInformation = Info;
+		}, [](FHttpErr ServerInformationFailResponse)
+		{
+			FTebexUE5::Log("Failed to get server information: " + ServerInformationFailResponse->GetContentAsString());
+		});
 	});
 
 	BeginRepeatingTask(120, []
 	{
-		PerformCheck(nullptr);
+		PerformCheck([](FEmptyBody Response)
+		{
+			FTebexUE5::Log("Check completed.");
+		}, [](FHttpErr CheckFailResponse)
+		{
+			FTebexUE5::Log("Check failed: " + CheckFailResponse->GetContentAsString());
+		});
 	});
 
 	BeginRepeatingTask(60 * 5, []
 	{
-		SendJoinEvents(nullptr);
-		DeleteCompletedCommands(nullptr);
+		SendJoinEvents([](FEmptyBody Response)
+		{
+				
+		}, [](FHttpErr JoinEventsFailResponse)
+		{
+			FTebexUE5::Log("Failed to send join events: " + JoinEventsFailResponse->GetContentAsString());
+		});
+
+		DeleteCompletedCommands([](FEmptyBody Response)
+		{
+			FTebexUE5::Log("Executed commands deleted successfully.");
+		}, [](FHttpErr DeleteCommandsFailResponse)
+		{
+			FTebexUE5::Log("Failed to send executed commands: " + DeleteCommandsFailResponse->GetContentAsString());
+		});
 	});
 
 	return true;
 }
 
-void UTebexPlugin::PerformCheck(TOkCallable<FEmptyBody> Callback)
+void UTebexPlugin::PerformCheck(TOkCallable<FEmptyBody> Callback, FErrCallable Error)
 {
     // Get due players
     UTebexPluginAPI::GetDuePlayers([Callback](FDuePlayersResponse DuePlayers)
@@ -62,7 +93,7 @@ void UTebexPlugin::PerformCheck(TOkCallable<FEmptyBody> Callback)
                 {
                     if (Command.conditions.delay > 0)
                     {
-                        DelayCommand(Command, Command.conditions.delay);
+                        DelayCommand(Command);
                         continue;
                     }
 
@@ -99,25 +130,26 @@ void UTebexPlugin::PerformCheck(TOkCallable<FEmptyBody> Callback)
                 }
             });
         }
-    }, [Callback](FHttpErr DuePlayersFailResponse)
-    {
-        // Failed to get the due players, log and trigger the callback
-        FTebexUE5::Log("Failed to get due players: " + DuePlayersFailResponse->GetContentAsString());
-        
-        if (Callback != nullptr)
-        {
-            Callback(FTebexUE5::EmptyRequest);
-        }
-    });
+    }, Error);
 }
 
 void UTebexPlugin::Shutdown()
 {
-	SendJoinEvents(nullptr);
-	DeleteCompletedCommands(nullptr);
+	SendJoinEvents([](FEmptyBody Response)
+	{
+	}, [](FHttpErr JoinEventsFailResponse)
+	{
+		FTebexUE5::Log("Failed to send join events at shutdown: " + JoinEventsFailResponse->GetContentAsString());
+	});
+	DeleteCompletedCommands([](FEmptyBody Response)
+	{
+	}, [](FHttpErr DeleteCommandsFailResponse)
+	{
+		FTebexUE5::Log("Failed to send executed commands at shutdown: " + DeleteCommandsFailResponse->GetContentAsString());		
+	});
 }
 
-void UTebexPlugin::RefreshServerInformation(TOkCallable<FServerInformation> Callback)
+void UTebexPlugin::RefreshServerInformation(TOkCallable<FServerInformation> Callback, FErrCallable Error)
 {
 	UTebexPluginAPI::GetServerInformation([Callback](const FServerInformation& RemoteServerInformation)
 	{
@@ -126,14 +158,10 @@ void UTebexPlugin::RefreshServerInformation(TOkCallable<FServerInformation> Call
 		{
 			Callback(ServerInformation);	
 		}
-	}, [Callback](FHttpErr ServerInformationFailResponse)
-	{
-		FTebexUE5::Log("Failed to get server information: " + ServerInformationFailResponse->GetContentAsString());
-		Callback(FServerInformation());
-	});
+	}, Error);
 }
 
-void UTebexPlugin::SendJoinEvents(TOkCallable<FEmptyBody> Callback)
+void UTebexPlugin::SendJoinEvents(TOkCallable<FEmptyBody> Callback, FErrCallable Error)
 {
 	UTebexPluginAPI::SendEvents(JoinEvents, [Callback](const FEmptyBody& Response)
 	{
@@ -150,11 +178,28 @@ void UTebexPlugin::SendJoinEvents(TOkCallable<FEmptyBody> Callback)
 
 bool UTebexPlugin::DispatchCommand(const FString Command)
 {
-	//TODO send to engine command processor
-	return false;
+	if (GEngine)
+	{
+		// Execute the command and check if it was processed successfully
+		if (GEngine->Exec(nullptr, *Command))
+		{
+			FTebexUE5::Log("Successfully executed command: " + Command);
+			return true; // Command successfully executed
+		}
+		else
+		{
+			FTebexUE5::Log("Failed to execute command: " + Command);
+		}
+	}
+	else
+	{
+		FTebexUE5::Log("No GEngine pointer. Are we executing commands too early?");
+	}
+
+	return false; // Command failed to execute
 }
 
-void UTebexPlugin::DelayCommand(const FCommand Command, int32 Seconds)
+void UTebexPlugin::DelayCommand(const FCommand Command)
 {
 	BeginDelayedTask(Command.conditions.delay, [Command]()
 	{
@@ -167,7 +212,7 @@ void UTebexPlugin::RecordJoinEvent(FString PlayerId, FString PlayerUsername)
 	FJoinEvent Event;
 	Event.username_id = PlayerId; // a non-changing player unique numeric/uuid identifier
 	Event.username = PlayerUsername; // your game's "friendly" username implementation
-	Event.event_date = ""; //TODO
+	Event.event_date = FDateTime::UtcNow().ToIso8601();
 	Event.event_type = "server.join";
 	
 	JoinEvents.events.Add(Event);
@@ -178,7 +223,7 @@ void UTebexPlugin::RecordCompletedCommand(const FCommand Command)
 	CompletedCommands.Add(Command);
 }
 
-void UTebexPlugin::DeleteCompletedCommands(TOkCallable<FEmptyBody> Callback)
+void UTebexPlugin::DeleteCompletedCommands(TOkCallable<FEmptyBody> Callback, FErrCallable Error)
 {
 	TArray<int32> IDsToDelete;
 	for (FCommand Command : CompletedCommands)
@@ -193,11 +238,7 @@ void UTebexPlugin::DeleteCompletedCommands(TOkCallable<FEmptyBody> Callback)
 		{
 			Callback(Response);	
 		}
-	}, [Callback](FHttpErr Response)
-	{
-		FTebexUE5::Log("Failed to send delete commands: " + Response->GetContentAsString());
-		Callback(FTebexUE5::EmptyRequest);
-	});
+	}, Error);
 }
 
 void UTebexPlugin::BeginRepeatingTask(int IntervalSeconds, TFunction<void()> Task)

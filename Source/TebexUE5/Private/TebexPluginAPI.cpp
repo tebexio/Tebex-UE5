@@ -17,6 +17,11 @@ bool UTebexPluginAPI::SecretKeyIsSet = false;
 
 DEFINE_LOG_CATEGORY(LogTebexPlugin);
 
+bool UTebexPluginAPI::IsSecretKeySet()
+{
+	return SecretKeyIsSet;
+}
+
 void UTebexPluginAPI::SetSecretKey(FString Key)
 {
 	if (Key.IsEmpty())

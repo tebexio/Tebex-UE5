@@ -42,6 +42,9 @@ bool FTebexRecordCompletedCommandTest::RunTest(const FString& Parameters)
                 Plugin->DeleteCompletedCommands([Callback](FEmptyBody Data)
                 {
                     Callback(Data);
+                }, [ErrorCallback](FHttpResponsePtr Error)
+                {
+                    ErrorCallback(Error);
                 });
             },
             [this](FAutomationTestBase* Test, const FEmptyBody& Data)
@@ -71,6 +74,9 @@ bool FTebexPluginRefreshServerInformationTest::RunTest(const FString& Parameters
                     UTebexPlugin::RefreshServerInformation([Callback](FServerInformation Data)
                     {
                         Callback(Data);
+                    }, [ErrorCallback](FHttpResponsePtr Error)
+                    {
+                        ErrorCallback(Error);
                     });
                 },
                 [this](FAutomationTestBase* Test, const FServerInformation& Data)
@@ -90,6 +96,9 @@ bool FTebexPluginPerformCheckTest::RunTest(const FString& Parameters)
                     UTebexPlugin::PerformCheck([Callback](FEmptyBody Data)
                     {
                         Callback(Data);
+                    }, [ErrorCallback](FHttpResponsePtr Error)
+                    {
+                        ErrorCallback(Error);
                     });
                 },
                 [this](FAutomationTestBase* Test, const FEmptyBody& Data)

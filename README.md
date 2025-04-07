@@ -8,9 +8,8 @@ allows you to easily set up your game for monetization.
 
 1. Open your game's solution in your IDE
 2. Clone this repository to your game's `Plugins` folder
-3. **Re-index** and rebuild your project
 
-Depending on your IDE, all source files may not immediately be recognized and added to your game's solution and cause compilation failures. Ensure all files in the `Plugins/TebexUE5` folder are indexed in your IDE.
+⚠️ Depending on your IDE, you may need to re-index your project before building. All source files may not immediately be recognized and added to your game's solution and cause compilation failures. Ensure all files in the `Plugins/TebexUE5` folder are indexed in your IDE.
 
 - Rider: In **File System** view, right-click any source code files in `Plugins/TebexUE5` suffixed with `no index` and click **Include**.
 

@@ -27,6 +27,7 @@ public:
 	static void ListActivePackages(const FString& PlayerId, TOkCallable<FActivePackagesResponse> Callback, FErrCallable Error);
 	static void SendEvents(const FJoinEvents& Events, TOkCallable<FEmptyBody> Callback, FErrCallable Error);
 	static void SetSecretKey(FString Key);
+	static bool IsSecretKeySet();
 private:
 	static FString SecretKey;
 	static bool SecretKeyIsSet;
