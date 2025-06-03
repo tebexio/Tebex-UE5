@@ -45,6 +45,9 @@ public:
 	static void RemoveGiftCard(const FBasket& Basket, const FGiftCardNumber& GiftCardNumber, TOkCallable<FBasket> Callback, FErrCallable Error);
 	static void ApplyCoupon(const FBasket& Basket, const FString& CouponCode, TOkCallable<FResult> Callback, FErrCallable Error);
 	static void RemoveCoupon(const FBasket& Basket, const FString& CouponCode, TOkCallable<FResult> Callback, FErrCallable Error);
+	static void GetTieredCategoriesForUser(const FString& UsernameId, TOkCallable<FCategoriesResponse> Callback, FErrCallable Error);
+	static void GetTieredCategories(TOkCallable<FCategoriesResponse> Callback, FErrCallable Error);
+	static void UpdateTier(const int TierId, const int NewTierPackageId, TOkCallable<FUpdateTierResponse> Callback, FErrCallable Error);
 	static void SetPublicToken(FString Token);
 private:
 	static FString PublicToken;
