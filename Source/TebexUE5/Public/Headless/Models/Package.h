@@ -75,11 +75,14 @@ struct FTebexPackage
 	UPROPERTY()
 	int32 Order;
 
+	UPROPERTY()
+	float ProratePrice;
+	
 	FTebexPackage() :
 		Id(0), Name(TEXT("")), Description(TEXT("")), Type(TEXT("")),
 		Category(FPackageCategory()), Base_Price(-1.0f), Sales_Tax(-1.0f), Total_Price(-1.0f), Currency(TEXT("")),
 		Discount(-1.0f), Disable_Quantity(false), Disable_Gifting(false), Created_At(TEXT("")),
-		Updated_At(TEXT("")), Order(-1) {}
+		Updated_At(TEXT("")), Order(-1), ProratePrice(-1.0f) {}
 };
 
 USTRUCT()

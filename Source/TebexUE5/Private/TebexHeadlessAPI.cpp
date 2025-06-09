@@ -200,6 +200,36 @@ void UTebexHeadlessAPI::RemoveCoupon(const FBasket& Basket, const FString& Coupo
 	}, Error);
 }
 
+void UTebexHeadlessAPI::GetTieredCategoriesForUser(const FString& UsernameId, TOkCallable<FCategoriesResponse> Callback,
+	FErrCallable Error)
+{
+	const FString Url = BaseUrl + "accounts/" + PublicToken + "/categories?usernameId=" + UsernameId;
+	MakeRequest<FCategoriesResponse, FEmptyBody>(Url, "GET", [Callback](const FCategoriesResponse& Response)
+	{
+		Callback(Response);
+	}, Error);
+}
+
+void UTebexHeadlessAPI::GetTieredCategories(TOkCallable<FCategoriesResponse> Callback, FErrCallable Error)
+{
+	const FString Url = BaseUrl + "accounts/" + PublicToken + "/categories";
+	MakeRequest<FCategoriesResponse, FEmptyBody>(Url, "GET", [Callback](const FCategoriesResponse& Response)
+	{
+		Callback(Response);
+	}, Error);
+}
+
+void UTebexHeadlessAPI::UpdateTier(const int TierId, const int NewTierPackageId, TOkCallable<FUpdateTierResponse> Callback,
+	FErrCallable Error)
+{
+	const FString Url = BaseUrl + "accounts/" + PublicToken + "/tiers/" + FString::FromInt(TierId);
+	const FUpdateTierPayload Payload = FUpdateTierPayload(NewTierPackageId);
+	MakeRequest<FUpdateTierResponse, FUpdateTierPayload>(Url, "PATCH", Payload, [Callback](const FUpdateTierResponse& Response)
+		{
+			Callback(Response);
+		}, Error);
+}
+
 void UTebexHeadlessAPI::SetPublicToken(FString Token)
 {
 	if (Token.IsEmpty())
